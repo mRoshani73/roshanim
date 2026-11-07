@@ -1,0 +1,768 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Obsidian Aurora Landscape Sanctuary | Nocturnal Arctic Havens</title>
+    <meta name="description" content="A museum-grade sanctuary portal channeling the quiet reverence and monumental stillness of untamed nocturnal wilderness and Arctic auroral landscapes." />
+    <meta property="og:title" content="Obsidian Aurora Landscape Sanctuary | Nocturnal Arctic Havens" />
+    <meta property="og:description" content="A museum-grade sanctuary portal channeling the quiet reverence and monumental stillness of untamed nocturnal wilderness and Arctic auroral landscapes." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Google Fonts Preconnect & Stylesheets -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+    <!-- Tailwind CSS CDN for pure client-side GitHub Pages compatibility -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              obsidian: {
+                void: '#070a11',
+                navy: '#0a0e17',
+                dim: '#10131b',
+                surface: '#1c2027',
+                high: '#272a32',
+                highest: '#32353d'
+              },
+              aurora: {
+                emerald: '#10b981',
+                teal: '#2dd4bf',
+                frost: '#93c5fd',
+                amber: '#f59e0b',
+                glow: '#4edea3'
+              }
+            },
+            fontFamily: {
+              editorial: ['"Playfair Display"', 'Georgia', 'serif'],
+              sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+              mono: ['"JetBrains Mono"', 'monospace']
+            }
+          }
+        }
+      }
+    </script>
+
+    <!-- Custom Sanctuary Design System Stylesheet -->
+    <link rel="stylesheet" href="assets/css/style.css" />
+  </head>
+  <body class="bg-[#070a11] text-[#94a3b8] font-sans selection:bg-[#10b981] selection:text-[#070a11]">
+    <!-- Ambient Aurora Sky Canvas -->
+    <div class="aurora-bg-mesh">
+      <canvas id="aurora-canvas" class="aurora-canvas"></canvas>
+    </div>
+
+    <!-- Live Telemetry Ribbon (Sticky Utility Bar) -->
+    <aside aria-label="Live Arctic Telemetry" class="relative z-30 w-full border-b border-white/5 bg-[#0a0e17]/80 backdrop-blur-md text-[11px] font-mono tracking-wider text-slate-400 py-1.5 px-4">
+      <div class="sanctuary-container flex items-center justify-between overflow-x-auto gap-6 whitespace-nowrap">
+        <div class="flex items-center gap-4">
+          <span class="flex items-center gap-1.5 text-slate-300">
+            <span class="telemetry-dot"></span>
+            <span>68°18'N · 14°12'E</span>
+          </span>
+          <span class="text-slate-600 hidden sm:inline">|</span>
+          <span class="hidden sm:inline">Elevation 620m ASL</span>
+          <span class="text-slate-600 hidden md:inline">|</span>
+          <span class="hidden md:inline">Atmosphere: <span id="telemetry-temp" class="text-emerald-400 font-semibold">-4.2°C</span></span>
+        </div>
+        <div class="flex items-center gap-4">
+          <span>Solar Wind: <span id="telemetry-wind" class="text-slate-200">488 km/s</span></span>
+          <span class="text-slate-600 hidden lg:inline">|</span>
+          <span class="hidden lg:inline">Geomagnetic Kp: <span class="text-emerald-400 font-semibold">5.8 (Active Aurora)</span></span>
+          <span class="text-slate-600">|</span>
+          <span id="telemetry-clock" class="text-teal-300">--:--:-- UTC</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Top Bar Contract: 3 Zones ([Brand] - [4-5 Links] - [1 Primary Action]) -->
+    <header class="sticky top-0 z-40 w-full border-b border-white/8 bg-[#070a11]/85 backdrop-blur-xl">
+      <div class="sanctuary-container flex items-center justify-between gap-8 py-4">
+        <!-- Zone 1: Single text element wordmark -->
+        <a href="#hero" class="text-xl md:text-2xl font-editorial font-medium tracking-tight text-[#f8fafc] whitespace-nowrap shrink-0 hover:text-emerald-300 transition-colors">
+          Obsidian Aurora
+        </a>
+
+        <!-- Zone 2: 4-5 concise single-line nav links -->
+        <nav class="hidden md:flex items-center gap-8 text-sm font-medium whitespace-nowrap shrink-0">
+          <a href="#sanctuaries" class="nav-link">Sanctuaries</a>
+          <a href="#observatory" class="nav-link">Observatory</a>
+          <a href="#philosophy" class="nav-link">Philosophy</a>
+          <a href="#archives" class="nav-link">Archives</a>
+          <a href="#reservations" class="nav-link">Reservations</a>
+        </nav>
+
+        <!-- Zone 3: 1 primary action button + Mobile Toggle -->
+        <div class="flex items-center gap-3 shrink-0">
+          <a href="#reservations" class="btn-primary-aurora text-xs hidden sm:inline-flex">
+            Reserve Sanctuary Pass
+          </a>
+          <button 
+            type="button" 
+            id="mobile-menu-toggle" 
+            aria-label="Toggle Navigation Menu" 
+            aria-expanded="false" 
+            class="md:hidden p-2 rounded-lg bg-white/5 border border-white/10 text-slate-300 hover:text-white"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Navigation Drawer -->
+      <div id="mobile-nav-drawer" class="hidden md:hidden border-t border-white/10 bg-[#070a11]/95 px-6 py-4 space-y-3">
+        <a href="#sanctuaries" class="mobile-nav-link block py-2 text-sm text-slate-300 hover:text-emerald-400">Sanctuaries</a>
+        <a href="#observatory" class="mobile-nav-link block py-2 text-sm text-slate-300 hover:text-emerald-400">Celestial Observatory</a>
+        <a href="#philosophy" class="mobile-nav-link block py-2 text-sm text-slate-300 hover:text-emerald-400">Architectural Philosophy</a>
+        <a href="#archives" class="mobile-nav-link block py-2 text-sm text-slate-300 hover:text-emerald-400">Nocturnal Archives</a>
+        <a href="#reservations" class="mobile-nav-link block py-2 text-sm text-slate-300 hover:text-emerald-400">Reservations</a>
+        <div class="pt-2">
+          <a href="#reservations" class="mobile-nav-link btn-primary-aurora w-full text-center text-xs">Reserve Sanctuary Pass</a>
+        </div>
+      </div>
+    </header>
+
+    <main id="main-content" class="relative z-10">
+      <!-- Hero Marquee Section -->
+      <section id="hero" class="relative pt-16 pb-24 md:pt-28 md:pb-36 overflow-hidden">
+        <div class="sanctuary-container">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <!-- Hero Narrative Column -->
+            <div class="lg:col-span-7 space-y-8">
+              <div class="space-y-3">
+                <span class="label-caps block text-emerald-400">
+                  Arctic Fjord & Alpine Sanctuary · Archival Portfolio
+                </span>
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-editorial font-normal tracking-tight text-[#f8fafc] text-balance leading-[1.12]">
+                  Where Abyssal Earth Meets Luminous Night
+                </h1>
+              </div>
+
+              <p class="text-lg text-slate-300 font-light leading-relaxed max-w-xl">
+                A contemplative nocturnal sanctuary nestled within the jagged basalt fjords of Northern Norway. Experience the sublime dance of the aurora borealis from precision-sculpted dark crystal and volcanic glass pavilions.
+              </p>
+
+              <div class="flex flex-wrap items-center gap-4 pt-2">
+                <a href="#sanctuaries" class="btn-primary-aurora">
+                  Explore Sanctuaries
+                </a>
+                <a href="#observatory" class="btn-glass">
+                  Live Aurora Observatory
+                </a>
+              </div>
+
+              <!-- Curatorial Proof Metrics adjacent to hero -->
+              <div class="grid grid-cols-3 gap-6 pt-8 border-t border-white/8 text-slate-400">
+                <div>
+                  <div class="text-2xl font-mono text-white font-medium">Bortle 1</div>
+                  <div class="text-xs text-slate-500 uppercase tracking-wider mt-1">Dark Sky Class</div>
+                </div>
+                <div>
+                  <div class="text-2xl font-mono text-emerald-400 font-medium">100%</div>
+                  <div class="text-xs text-slate-500 uppercase tracking-wider mt-1">Geothermal Powered</div>
+                </div>
+                <div>
+                  <div class="text-2xl font-mono text-teal-300 font-medium">6 Units</div>
+                  <div class="text-xs text-slate-500 uppercase tracking-wider mt-1">Secluded Pavilions</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Hero Cinematic Glass Frame Column -->
+            <div class="lg:col-span-5 relative">
+              <div class="glass-panel-elevated p-2 relative group overflow-hidden">
+                <div class="relative h-[440px] w-full rounded-2xl overflow-hidden img-fallback-container">
+                  <img 
+                    src="https://images.unsplash.com/photo-1517411032315-54ef2cb783bb?auto=format&fit=crop&w=1200&q=80" 
+                    alt="Arctic Aurora over Obsidian Basalt Fjord"
+                    class="w-full h-full object-cover"
+                    referrerpolicy="no-referrer"
+                  />
+                  <div class="absolute inset-0 media-gradient-scrim"></div>
+                  
+                  <!-- Floating Glass Overlay Card -->
+                  <div class="absolute bottom-4 left-4 right-4 glass-panel p-4 backdrop-blur-md">
+                    <div class="flex items-center justify-between text-xs font-mono text-slate-300 mb-1">
+                      <span>Pavilion 01: The Monolith</span>
+                      <span class="text-emerald-400">Kp 5.8 Active</span>
+                    </div>
+                    <div class="text-xs text-slate-400 font-light">
+                      Optically pure electrochromic quartz facing 360° celestial zenith.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section Divider -->
+      <div class="sanctuary-container">
+        <div class="hairline-divider"></div>
+      </div>
+
+      <!-- Curatorial Statement & Architectural Philosophy -->
+      <section id="philosophy" class="py-24 md:py-32">
+        <div class="sanctuary-container">
+          <div class="max-w-3xl mb-16">
+            <span class="label-caps block text-emerald-400 mb-2">Curatorial Philosophy</span>
+            <h2 class="text-3xl md:text-4xl font-editorial font-medium text-white tracking-tight">
+              A Dialogue Between Geological Gravitas and Celestial Radiance
+            </h2>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-start">
+            <div class="md:col-span-7 space-y-6 text-slate-300 leading-relaxed font-light text-base">
+              <p class="editorial-dropcap text-lg text-slate-200">
+                The Obsidian Aurora Sanctuary was conceived not as an architectural intrusion, but as an astronomical lens. In the extreme latitudes of the Arctic winter, human perception shifts. The landscape is stripped of extraneous daylight, leaving only primordial basalt bedrock, ancient blue ice, and the luminous electromagnetic theater of the upper atmosphere.
+              </p>
+              <p>
+                Each pavilion is anchored directly to Precambrian gneiss and basalt, utilizing geothermal closed-loop circuits drilled 300 meters into subterranean thermal gradients. The structural shells employ dark smoked crystal with nano-scale anti-reflective coatings, ensuring that indoor warmth does not compromise nocturnal vision.
+              </p>
+              <p>
+                Here, silence is treated as a museum artifact. Acoustic baffling reduces interior ambient decibels to -46dB—allowing residents to hear only the rhythmic inhalation of the fjord and the rare, whisper-like geomagnetic crackle of auroral storms.
+              </p>
+            </div>
+
+            <div class="md:col-span-5 space-y-6">
+              <div class="glass-panel p-6">
+                <span class="label-caps text-teal-400 block mb-2">Pillar I</span>
+                <h3 class="font-editorial text-xl text-white font-medium mb-2">Untamed Nocturnal Wilderness</h3>
+                <p class="text-xs text-slate-400 leading-relaxed">
+                  Situated 200 kilometers north of the Arctic Circle inside an internationally certified Bortle 1 Dark Sky preserve. Zero artificial light pollution for 60 nautical miles.
+                </p>
+              </div>
+
+              <div class="glass-panel p-6">
+                <span class="label-caps text-emerald-400 block mb-2">Pillar II</span>
+                <h3 class="font-editorial text-xl text-white font-medium mb-2">Sculpted Dark Glassmorphism</h3>
+                <p class="text-xs text-slate-400 leading-relaxed">
+                  Precision-milled titanium mullions and electrochromic quartz plates that dynamically adjust transparency based on exterior solar proton flux and lunar altitude.
+                </p>
+              </div>
+
+              <div class="glass-panel p-6">
+                <span class="label-caps text-amber-400 block mb-2">Pillar III</span>
+                <h3 class="font-editorial text-xl text-white font-medium mb-2">Closed-Loop Planetary Stewardship</h3>
+                <p class="text-xs text-slate-400 leading-relaxed">
+                  100% net-positive operation powered by deep glacial geothermal cycles and micro-hydro installations. Certified carbon negative with a dedicated land-trust endowment.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section Divider -->
+      <div class="sanctuary-container">
+        <div class="hairline-divider"></div>
+      </div>
+
+      <!-- Curated Sanctuaries & Pavilions (Filterable Gallery & Inspector) -->
+      <section id="sanctuaries" class="py-24 md:py-32">
+        <div class="sanctuary-container">
+          <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+            <div>
+              <span class="label-caps block text-emerald-400 mb-2">Curated Havens</span>
+              <h2 class="text-3xl md:text-4xl font-editorial font-medium text-white tracking-tight">
+                Architectural Pavilions & Shelters
+              </h2>
+              <p class="text-sm text-slate-400 mt-2 max-w-xl">
+                Six isolated architectural vantage points engineered for unimpeded nocturnal stargazing and contemplation.
+              </p>
+            </div>
+
+            <!-- Functional Segmented Filter Buttons -->
+            <div class="flex flex-wrap items-center gap-2">
+              <button type="button" class="btn-pill-filter filter-btn active" data-filter="all">All Sanctuaries</button>
+              <button type="button" class="btn-pill-filter filter-btn" data-filter="glacial-ridge">Glacial Ridge</button>
+              <button type="button" class="btn-pill-filter filter-btn" data-filter="fjord-edge">Fjord Edge</button>
+              <button type="button" class="btn-pill-filter filter-btn" data-filter="alpine-dome">Alpine Dome</button>
+              <button type="button" class="btn-pill-filter filter-btn" data-filter="basalt-cavern">Basalt Cavern</button>
+            </div>
+          </div>
+
+          <!-- Pavilion Cards Grid (Rendered dynamically via script.js) -->
+          <div id="pavilion-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Section Divider -->
+      <div class="sanctuary-container">
+        <div class="hairline-divider"></div>
+      </div>
+
+      <!-- Live Celestial Observatory & Aurora Forecast Console -->
+      <section id="observatory" class="py-24 md:py-32">
+        <div class="sanctuary-container">
+          <div class="max-w-3xl mb-12">
+            <span class="label-caps block text-teal-400 mb-2">Live Astrometric Console</span>
+            <h2 class="text-3xl md:text-4xl font-editorial font-medium text-white tracking-tight">
+              Celestial Observatory & Diurnal Aurora Modeler
+            </h2>
+            <p class="text-sm text-slate-400 mt-2">
+              Scrub the nocturnal hours below to simulate predicted auroral intensity, geomagnetic activity curves, and atmospheric emissions at the sanctuary zenith.
+            </p>
+          </div>
+
+          <!-- Observatory Interactive Console Frame -->
+          <div class="glass-panel-elevated p-6 md:p-10 relative overflow-hidden">
+            <!-- Ambient Glow Ring -->
+            <div id="observatory-glow-ring" class="absolute -top-24 -right-24 w-96 h-96 rounded-full pointer-events-none transition-all duration-700 opacity-70"></div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+              <!-- Left Visual Instrument Panel -->
+              <div class="lg:col-span-5 space-y-6">
+                <div class="glass-panel p-6 border-emerald-500/20">
+                  <div class="flex items-center justify-between text-xs font-mono text-slate-400 pb-3 border-b border-white/5">
+                    <span>Zenith Timestamp</span>
+                    <span id="observatory-time-display" class="text-2xl text-emerald-300 font-semibold">00:30</span>
+                  </div>
+
+                  <div class="grid grid-cols-2 gap-4 my-4 font-mono text-xs">
+                    <div>
+                      <span class="text-slate-500 block text-[10px] uppercase">Planetary Kp</span>
+                      <span id="observatory-kp-display" class="text-white text-base font-semibold">Kp 6.4</span>
+                    </div>
+                    <div>
+                      <span class="text-slate-500 block text-[10px] uppercase">Intensity Status</span>
+                      <span id="observatory-intensity-display" class="font-mono text-xs px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">Peak Coronal</span>
+                    </div>
+                  </div>
+
+                  <div class="space-y-2 pt-3 border-t border-white/5">
+                    <span class="text-[10px] font-mono text-slate-500 uppercase tracking-wider block">Observed Phenomenon</span>
+                    <h4 id="observatory-phenomena-label" class="font-editorial text-lg text-white font-medium">Corona Zenith Discharge</h4>
+                    <p id="observatory-phenomena-desc" class="text-xs text-slate-300 leading-relaxed font-light">
+                      Auroral curtains converge directly overhead into a pulsing violet-emerald corona with high-frequency light ribbons.
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Web Audio Soundscape Synthesizer Affordance -->
+                <div class="glass-panel p-4 flex items-center justify-between gap-4">
+                  <div>
+                    <span class="text-xs font-mono text-white block">Glacial Soundscape Generator</span>
+                    <span id="soundscape-status-label" class="text-[11px] text-slate-400 font-light">Acoustic Generator Idle</span>
+                  </div>
+                  <button 
+                    type="button" 
+                    id="soundscape-toggle-btn"
+                    class="btn-glass text-xs py-1.5 px-3"
+                  >
+                    Generate Ambient Audio
+                  </button>
+                </div>
+              </div>
+
+              <!-- Right Interactive Scrubber & Spectral Graph -->
+              <div class="lg:col-span-7 space-y-8">
+                <div>
+                  <div class="flex items-center justify-between text-xs font-mono text-slate-300 mb-2">
+                    <span class="flex items-center gap-2">
+                      <span class="telemetry-dot"></span>
+                      <span>Nocturnal Timeline Scrubber</span>
+                    </span>
+                    <span class="text-slate-500">20:00 → 06:00 Polar Night</span>
+                  </div>
+                  <input 
+                    type="range" 
+                    id="celestial-time-slider" 
+                    min="0" 
+                    max="6" 
+                    step="1" 
+                    value="3" 
+                    class="celestial-slider" 
+                    aria-label="Celestial Observation Time Slider"
+                  />
+                  <div class="flex justify-between text-[11px] font-mono text-slate-500 mt-2">
+                    <span>20:00 (Dusk)</span>
+                    <span>23:00</span>
+                    <span class="text-emerald-400 font-semibold">00:30 (Peak Zenith)</span>
+                    <span>03:45</span>
+                    <span>06:00 (Dawn)</span>
+                  </div>
+                </div>
+
+                <!-- Aurora Spectrometry Breakdown -->
+                <div class="p-6 rounded-xl bg-black/40 border border-white/5 space-y-4">
+                  <h4 class="text-xs font-mono uppercase tracking-wider text-slate-400">Emission Spectrogram</h4>
+                  <div class="space-y-3 font-mono text-xs">
+                    <div>
+                      <div class="flex justify-between text-slate-300 mb-1">
+                        <span>Atomic Oxygen (O I) · 557.7 nm (Emerald)</span>
+                        <span class="text-emerald-400">88% Flux</span>
+                      </div>
+                      <div class="w-full bg-white/5 h-2 rounded-full overflow-hidden">
+                        <div class="bg-gradient-to-r from-emerald-500 to-teal-400 h-full rounded-full" style="width: 88%"></div>
+                      </div>
+                    </div>
+
+                    <div>
+                      <div class="flex justify-between text-slate-300 mb-1">
+                        <span>Molecular Nitrogen (N2) · 670.0 nm (Crimson Arc)</span>
+                        <span class="text-amber-400">42% Flux</span>
+                      </div>
+                      <div class="w-full bg-white/5 h-2 rounded-full overflow-hidden">
+                        <div class="bg-gradient-to-r from-amber-500 to-rose-400 h-full rounded-full" style="width: 42%"></div>
+                      </div>
+                    </div>
+
+                    <div>
+                      <div class="flex justify-between text-slate-300 mb-1">
+                        <span>Ionized Nitrogen (N2+) · 391.4 nm (Violet Fringe)</span>
+                        <span class="text-blue-400">65% Flux</span>
+                      </div>
+                      <div class="w-full bg-white/5 h-2 rounded-full overflow-hidden">
+                        <div class="bg-gradient-to-r from-teal-400 to-indigo-400 h-full rounded-full" style="width: 65%"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section Divider -->
+      <div class="sanctuary-container">
+        <div class="hairline-divider"></div>
+      </div>
+
+      <!-- The Nocturnal Archive / Curatorial Specimens -->
+      <section id="archives" class="py-24 md:py-32">
+        <div class="sanctuary-container">
+          <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+            <div>
+              <span class="label-caps block text-emerald-400 mb-2">Accession Catalog · Vol. VII</span>
+              <h2 class="text-3xl md:text-4xl font-editorial font-medium text-white tracking-tight">
+                Geological & Atmospheric Specimen Archive
+              </h2>
+              <p class="text-sm text-slate-400 mt-2 max-w-xl">
+                Preserved scientific and geological artifacts collected across the sanctuary archipelago under cryospheric curation protocols.
+              </p>
+            </div>
+          </div>
+
+          <!-- Archive Grid (Rendered via script.js) -->
+          <div id="archive-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Section Divider -->
+      <div class="sanctuary-container">
+        <div class="hairline-divider"></div>
+      </div>
+
+      <!-- Attributable Testimonials & Trust Evidence -->
+      <section class="py-24 md:py-32">
+        <div class="sanctuary-container">
+          <div class="max-w-2xl mb-12">
+            <span class="label-caps block text-teal-400 mb-2">Verified Residencies</span>
+            <h2 class="text-3xl md:text-4xl font-editorial font-medium text-white tracking-tight">
+              Testimonials from the Nocturnal Edge
+            </h2>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="glass-panel p-6 flex flex-col justify-between">
+              <blockquote class="text-sm text-slate-300 font-light italic leading-relaxed">
+                "Sleeping inside the Obsidian Monolith re-calibrated my sense of cosmic scale. Watching a coronal discharge erupt directly through the electrochromic glass while heated by subterranean geothermal currents is an experience without earthly parallel."
+              </blockquote>
+              <div class="mt-6 pt-4 border-t border-white/5">
+                <div class="text-sm font-editorial text-white font-medium">Dr. Astrid Lindqvist</div>
+                <div class="text-xs text-slate-400 font-mono">Polar Climatologist · Stockholm Academy</div>
+                <div class="text-[11px] text-slate-500 font-mono mt-1">Residency: Winter Solstice 2026</div>
+              </div>
+            </div>
+
+            <div class="glass-panel p-6 flex flex-col justify-between">
+              <blockquote class="text-sm text-slate-300 font-light italic leading-relaxed">
+                "The acoustic isolation is staggering. With the soundscape generator active, the boundary between external glacial silence and human architecture completely dissolves. The darkest, purest skies left in Europe."
+              </blockquote>
+              <div class="mt-6 pt-4 border-t border-white/5">
+                <div class="text-sm font-editorial text-white font-medium">Sean Callahan</div>
+                <div class="text-xs text-slate-400 font-mono">Architectural Photographer · AD Fellow</div>
+                <div class="text-[11px] text-slate-500 font-mono mt-1">Residency: October Equinox 2026</div>
+              </div>
+            </div>
+
+            <div class="glass-panel p-6 flex flex-col justify-between">
+              <blockquote class="text-sm text-slate-300 font-light italic leading-relaxed">
+                "The strict Bortle 1 preservation combined with museum-grade geological stewardship makes Obsidian Aurora a living sanctuary. The private telescope and telemetry console are research-grade."
+              </blockquote>
+              <div class="mt-6 pt-4 border-t border-white/5">
+                <div class="text-sm font-editorial text-white font-medium">Elena Rostova</div>
+                <div class="text-xs text-slate-400 font-mono">Trustee · International Dark-Sky Reserve</div>
+                <div class="text-[11px] text-slate-500 font-mono mt-1">Residency: November Aurora Surge 2026</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section Divider -->
+      <div class="sanctuary-container">
+        <div class="hairline-divider"></div>
+      </div>
+
+      <!-- Sanctuary Experience Planner & Reservation Pass Calculator -->
+      <section id="reservations" class="py-24 md:py-32">
+        <div class="sanctuary-container">
+          <div class="max-w-3xl mb-12">
+            <span class="label-caps block text-emerald-400 mb-2">Curatorial Access</span>
+            <h2 class="text-3xl md:text-4xl font-editorial font-medium text-white tracking-tight">
+              Sanctuary Pass & Residency Planner
+            </h2>
+            <p class="text-sm text-slate-400 mt-2">
+              Select your desired pavilion haven, dates, and curatorial expeditions. Rates include full access to the celestial observatory, private thermal spa facilities, and airport snowcat transfers.
+            </p>
+          </div>
+
+          <!-- Reservation Interactive Form -->
+          <form id="sanctuary-booking-form" class="glass-panel-elevated p-6 md:p-10 space-y-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <!-- Pavilion Selector -->
+              <div class="space-y-2">
+                <label for="calc-pavilion" class="text-xs font-mono uppercase tracking-wider text-slate-300 block">
+                  Select Haven Unit
+                </label>
+                <select id="calc-pavilion" class="sanctuary-select">
+                  <!-- Populated via script.js -->
+                </select>
+              </div>
+
+              <!-- Nights Duration -->
+              <div class="space-y-2">
+                <label for="calc-nights" class="text-xs font-mono uppercase tracking-wider text-slate-300 block">
+                  Duration (Nights)
+                </label>
+                <input 
+                  type="number" 
+                  id="calc-nights" 
+                  min="1" 
+                  max="14" 
+                  value="3" 
+                  class="sanctuary-input font-mono" 
+                />
+              </div>
+
+              <!-- Guests Count -->
+              <div class="space-y-2">
+                <label for="calc-guests" class="text-xs font-mono uppercase tracking-wider text-slate-300 block">
+                  Sanctuary Guests
+                </label>
+                <input 
+                  type="number" 
+                  id="calc-guests" 
+                  min="1" 
+                  max="4" 
+                  value="2" 
+                  class="sanctuary-input font-mono" 
+                />
+              </div>
+            </div>
+
+            <!-- Curatorial Add-On Expeditions -->
+            <div class="space-y-4 pt-6 border-t border-white/5">
+              <span class="label-caps text-slate-400 block">Curatorial Nocturnal Expeditions (Optional)</span>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <label class="sanctuary-checkbox-container p-4 rounded-lg bg-black/30 border border-white/5 hover:border-teal-500/30 transition-all">
+                  <input type="checkbox" class="sanctuary-checkbox calc-addon" data-price="240" checked />
+                  <div>
+                    <div class="flex items-center justify-between">
+                      <span class="text-sm font-medium text-white">Nocturnal Fjord Kayak Under Aurora</span>
+                      <span class="text-xs font-mono text-emerald-400">+€240 / person</span>
+                    </div>
+                    <p class="text-xs text-slate-400 mt-1">Gliding through pitch-black fjord waters reflecting vivid celestial aurora curtains.</p>
+                  </div>
+                </label>
+
+                <label class="sanctuary-checkbox-container p-4 rounded-lg bg-black/30 border border-white/5 hover:border-teal-500/30 transition-all">
+                  <input type="checkbox" class="sanctuary-checkbox calc-addon" data-price="310" />
+                  <div>
+                    <div class="flex items-center justify-between">
+                      <span class="text-sm font-medium text-white">Glacial Blue Ice Core Trek</span>
+                      <span class="text-xs font-mono text-emerald-400">+€310 / person</span>
+                    </div>
+                    <p class="text-xs text-slate-400 mt-1">Guided exploration of ancient sub-surface ice caverns with glaciologist safety team.</p>
+                  </div>
+                </label>
+
+                <label class="sanctuary-checkbox-container p-4 rounded-lg bg-black/30 border border-white/5 hover:border-teal-500/30 transition-all">
+                  <input type="checkbox" class="sanctuary-checkbox calc-addon" data-price="180" checked />
+                  <div>
+                    <div class="flex items-center justify-between">
+                      <span class="text-sm font-medium text-white">Dark-Sky Astrophotography Masterclass</span>
+                      <span class="text-xs font-mono text-emerald-400">+€180 / person</span>
+                    </div>
+                    <p class="text-xs text-slate-400 mt-1">Full access to cooled CCD cameras, equatorial tracking mounts, and one-on-one tutelage.</p>
+                  </div>
+                </label>
+
+                <label class="sanctuary-checkbox-container p-4 rounded-lg bg-black/30 border border-white/5 hover:border-teal-500/30 transition-all">
+                  <input type="checkbox" class="sanctuary-checkbox calc-addon" data-price="120" />
+                  <div>
+                    <div class="flex items-center justify-between">
+                      <span class="text-sm font-medium text-white">Private Geothermal Plunge & Sauna</span>
+                      <span class="text-xs font-mono text-emerald-400">+€120 / person</span>
+                    </div>
+                    <p class="text-xs text-slate-400 mt-1">Exclusive twilight booking of the cliff-edge volcanic steam pavilion and herbal infusions.</p>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <!-- Guest Registration Details -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-6 border-t border-white/5">
+              <div class="space-y-2">
+                <label for="guest-name" class="text-xs font-mono uppercase tracking-wider text-slate-300 block">Principal Guest Name</label>
+                <input type="text" id="guest-name" required placeholder="Elena Lindqvist" class="sanctuary-input" />
+              </div>
+              <div class="space-y-2">
+                <label for="guest-email" class="text-xs font-mono uppercase tracking-wider text-slate-300 block">Electronic Dispatch Address</label>
+                <input type="email" id="guest-email" required placeholder="guest@sanctuary-domain.org" class="sanctuary-input" />
+              </div>
+            </div>
+
+            <!-- Price Breakdown Calculation Ledger (Tabular Numerals) -->
+            <div class="p-6 rounded-xl bg-black/50 border border-white/8 space-y-3 font-mono text-xs">
+              <div class="flex justify-between text-slate-400">
+                <span>Haven Base Accommodation</span>
+                <span id="calc-base-rate" class="text-slate-200">€850 × 3 nights</span>
+              </div>
+              <div class="flex justify-between text-slate-400">
+                <span>Subtotal (Room & Expeditions)</span>
+                <span id="calc-subtotal" class="text-slate-200">€3,390</span>
+              </div>
+              <div class="flex justify-between text-slate-400">
+                <span>Arctic Land Trust Endowment (5%)</span>
+                <span id="calc-endowment" class="text-teal-400">€170</span>
+              </div>
+              <div class="hairline-divider my-2"></div>
+              <div class="flex justify-between items-center text-base pt-1">
+                <span class="text-white font-editorial font-medium text-lg">Total Sanctuary Pass</span>
+                <span id="calc-total" class="text-emerald-300 text-2xl font-bold font-mono">€3,560</span>
+              </div>
+            </div>
+
+            <!-- Confirmation Banner (Appears on submit) -->
+            <div id="booking-confirmation-banner" class="hidden p-6 rounded-xl bg-emerald-950/40 border border-emerald-500/40 space-y-4">
+              <div class="flex items-center gap-3 text-emerald-300">
+                <svg class="w-6 h-6 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <h4 class="font-editorial text-lg text-white font-medium">Residency Confirmed for <span id="conf-guest-name">Guest</span></h4>
+              </div>
+              <p class="text-xs text-slate-300 font-mono">
+                Your reservation for <strong id="conf-pavilion-name" class="text-emerald-300">Pavilion</strong> (<span id="conf-nights-count">3 Nights</span>) is logged at total <strong id="conf-total-rate" class="text-white">€3,560</strong>. Our Arctic transport coordinator will contact your dispatch address with tracked arrival instructions.
+              </p>
+              <div class="pt-2 flex flex-wrap gap-4">
+                <button type="button" id="download-ics-btn" class="btn-primary-aurora text-xs">
+                  Export Calendar Pass (.ICS)
+                </button>
+              </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-white/5">
+              <div class="text-xs text-slate-400 flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                <span>Immediate confirmation · 100% refundable up to 30 days prior</span>
+              </div>
+              <button type="submit" class="btn-primary-aurora w-full sm:w-auto text-sm px-8 py-3">
+                Confirm Sanctuary Pass
+              </button>
+            </div>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <!-- Modal Inspector Dialog for Pavilions and Archival Plates -->
+    <div 
+      id="pavilion-modal" 
+      class="modal-backdrop" 
+      role="dialog" 
+      aria-modal="true" 
+      aria-labelledby="modal-body-content"
+    >
+      <div class="glass-panel-elevated modal-content relative">
+        <button 
+          type="button" 
+          id="modal-close-btn" 
+          aria-label="Close Inspector Dialog" 
+          class="absolute top-4 right-4 z-20 p-2 rounded-full bg-black/60 border border-white/20 text-slate-300 hover:text-white hover:bg-black/80 transition-colors"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+        <div id="modal-body-content">
+          <!-- Dynamic Content Injected Here -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Curatorial Footer (Clean, Quiet, Anti-Slop Discipline) -->
+    <footer class="border-t border-white/8 bg-[#070a11] py-16 text-slate-500 text-xs font-mono">
+      <div class="sanctuary-container space-y-12">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div class="space-y-3">
+            <span class="font-editorial text-lg text-white font-medium block">Obsidian Aurora</span>
+            <p class="font-sans text-xs text-slate-400 leading-relaxed font-light">
+              A private dark-sky sanctuary and architectural observatory dedicated to contemplative immersion beneath the Arctic night sky.
+            </p>
+          </div>
+
+          <div class="space-y-2">
+            <span class="text-slate-300 uppercase tracking-widest block text-[10px]">Coordinates</span>
+            <div class="text-slate-400">68°18'22"N · 14°12'45"E</div>
+            <div class="text-slate-400">Austvågøya Island</div>
+            <div class="text-slate-400">Lofoten Archipelago, Norway</div>
+          </div>
+
+          <div class="space-y-2">
+            <span class="text-slate-300 uppercase tracking-widest block text-[10px]">Stewardship</span>
+            <div class="text-slate-400">Bortle Class 1 Dark Sky</div>
+            <div class="text-slate-400">Leave No Trace Arctic Charter</div>
+            <div class="text-slate-400">Subterranean Geothermal Closed-Loop</div>
+          </div>
+
+          <div class="space-y-2">
+            <span class="text-slate-300 uppercase tracking-widest block text-[10px]">Direct Curatorial Desk</span>
+            <div class="text-slate-400">curator@obsidianaurora.no</div>
+            <div class="text-slate-400">Telemetry Radio: HF 4280 kHz</div>
+            <div class="text-emerald-400 mt-2">Visits by Prior Reservation Only</div>
+          </div>
+        </div>
+
+        <div class="hairline-divider"></div>
+
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-slate-600">
+          <div>
+            © 2026 Obsidian Aurora Landscape Sanctuary. All architectural and astronomical rights reserved.
+          </div>
+          <div class="flex items-center gap-6">
+            <a href="#hero" class="hover:text-slate-400 transition-colors">Return to Zenith ↑</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Vanilla JavaScript Logic (Relative Path for GitHub Pages compatibility) -->
+    <script src="assets/js/script.js" defer></script>
+  </body>
+</html>
