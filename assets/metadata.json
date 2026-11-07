@@ -1,0 +1,8 @@
+{
+  "name": "Obsidian Aurora Landscape Sanctuary",
+  "description": "A museum-grade sanctuary portal channeling the quiet reverence and monumental stillness of untamed nocturnal wilderness and Arctic auroral landscapes.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
